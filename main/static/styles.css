@@ -1,0 +1,35 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+ol {
+    padding-left: 0;
+}
+
+.form-control {
+    padding: 10px;
+    font-size: 1rem;
+}
+
+button {
+    transition: background-color 0.3s ease-in-out;
+}
+
+button:hover {
+    background-color: #228b22;
+}
