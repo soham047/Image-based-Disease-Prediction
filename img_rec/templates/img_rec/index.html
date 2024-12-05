@@ -1,0 +1,130 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disease Detection System</title>
+    <link rel="stylesheet" href="{% static 'img_rec/css/styles.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header text-center">
+        <div class="container">
+            <h1>Disease Detection System</h1>
+            <p>Using AI to Assist in Early Detection and Diagnosis</p>
+        </div>
+    </header>
+
+    <!-- Main Content Section -->
+    <div class="content container mt-5">
+        <h2 class="text-center mb-4">Welcome to the Disease Detection System</h2>
+        <p class="text-center">
+            This platform leverages advanced machine learning models to assist in diagnosing various diseases from medical images.
+            Whether it's skin diseases, X-rays, or tumors, our system aims to provide accurate, reliable predictions to aid healthcare professionals and patients in making informed decisions.
+        </p>
+
+        <!-- How to Use Section -->
+        <div class="card p-4 shadow-sm mb-5">
+            <h4 class="text-center mb-4">How to Use</h4>
+            <ul class="list-unstyled text-center">
+                <li>Select the type of disease you want to check for from the dropdown menu.</li>
+                <li>Upload a clear image related to the selected disease category (e.g., a skin lesion, X-ray scan, or MRI).</li>
+                <li>Click on the "Classify Image" button to get the results.</li>
+            </ul>
+        </div>
+
+        <!-- Image Upload Section -->
+        <div class="card p-4 shadow-sm">
+            <h4 class="mb-4">Upload Your Image for Diagnosis</h4>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="disease" class="form-label">Select Disease Type:</label>
+                    <select name="disease" id="disease" class="form-select" required>
+                        <option value="" disabled selected>Select a disease</option>
+                        <option value="skin">Skin Disease</option>
+                        <option value="xray">X-Ray</option>
+                        <option value="tumor">Tumor Detection</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="image" class="form-label">Upload Image:</label>
+                    {{ form.image }}
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary" onclick="showLoading()">Classify Image</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Display Prediction Result -->
+        {% if predicted_label %}
+        <div class="mt-5">
+            <h4>Prediction Result:</h4>
+            <p><strong>{{ predicted_label }}</strong></p>
+            {% if image_url %}
+            <div class="text-center">
+                <h5>Uploaded Image:</h5>
+                <img src="{{ image_url }}" alt="Uploaded Image" class="img-fluid rounded shadow-sm mt-3" style="max-width: 100%; height: auto;">
+            </div>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        <!-- FAQ Section -->
+        <div class="card p-4 shadow-sm mt-5">
+            <h4 class="mb-4 text-center">Frequently Asked Questions (FAQs)</h4>
+            <div class="accordion" id="faqAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true">
+                            What types of diseases can this system detect?
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Currently, the system can detect skin diseases, analyze X-rays, and identify tumors.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                            How accurate are the predictions?
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            The models have been trained on a large dataset and tested for accuracy, but they should not replace professional medical advice.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                            Is my data secure?
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Yes, all uploaded images are handled securely and used solely for diagnostic purposes within this platform.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>© 2024 Disease Detection System | Developed by Soham Dutta</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'img_rec/js/script.js' %}"></script>
+</body>
+</html>
