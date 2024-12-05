@@ -14,9 +14,9 @@ model2 = None
 model3 = None
 
 
-model_path = os.path.join(settings.BASE_DIR, 'model.h5')
-model_path2 = os.path.join(settings.BASE_DIR, 'model_mri.h5')
-model_path3 = os.path.join(settings.BASE_DIR, 'model_xray.h5')
+model_path = os.path.join(settings.BASE_DIR, 'model/model.h5')
+model_path2 = os.path.join(settings.BASE_DIR, 'model/model_mri.h5')
+model_path3 = os.path.join(settings.BASE_DIR, 'model/model_xray.h5')
 
 try:
     # Load the model globally so it's accessible in the view
