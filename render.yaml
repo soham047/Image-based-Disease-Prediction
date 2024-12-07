@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: my-django-app
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn myproject.wsgi:application
+    envVars:
+      - key: DJANGO_SECRET_KEY
+        value: django-insecure-w86i#sn666g2*$vu$wym6=(4f+m3iuece^)#g#o=ufd7&t$rk#
+      - key: DATABASE_URL
+        sync: false
+    region: oregon  # Choose your preferred region
+
